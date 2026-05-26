@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ใจดี.pro — บริการพาไปหาหมอ</title>
+<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --rose:    #f43f5e;
+  --rose-d:  #e11d48;
+  --rose-l:  #fb7185;
+  --pink:    #ec4899;
+  --blush:   #fce7f3;
+  --blush-d: #fad7e8;
+  --petal:   #fdf2f8;
+  --cream:   #fff8f0;
+  --warm:    #7c3f5a;
+  --warm-d:  #4c1a35;
+  --sand:    #f9e8d0;
+  --muted:   #9d6b7a;
+  --text:    #3d1a2a;
+  --white:   #ffffff;
+  --shadow-pink: 0 8px 40px rgba(244,63,94,0.15);
+  --shadow-warm: 0 4px 24px rgba(76,26,53,0.12);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Sarabun',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
+
+/* ── CURSOR ── */
+body{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' fill='%23f43f5e' opacity='0.5'/%3E%3C/svg%3E") 12 12, auto;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 40px;display:flex;align-items:center;justify-content:space-between;transition:all 0.4s;}
+nav.scrolled{background:rgba(253,242,248,0.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(244,63,94,0.1);box-shadow:0 2px 20px rgba(244,63,94,0.08);}
+.nav-logo{font-family:'Mitr',sans-serif;font-weight:700;font-size:22px;color:var(--rose);text-decoration:none;display:flex;align-items:center;gap:6px;}
+.nav-logo .dot{color:var(--rose);}
+.nav-links{display:flex;align-items:center;gap:24px;}
+.nav-links a{font-size:14px;font-weight:500;color:var(--warm);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--rose);}
+.nav-cta{background:var(--rose)!important;color:white!important;padding:10px 22px;border-radius:99px;font-weight:600!important;box-shadow:var(--shadow-pink);transition:all 0.2s!important;}
+.nav-cta:hover{background:var(--rose-d)!important;transform:translateY(-1px);}
+
+/* ── HERO ── */
+.hero{min-height:100vh;background:linear-gradient(160deg,var(--warm-d) 0%,#7c2d55 40%,#9d3d6b 100%);position:relative;overflow:hidden;display:flex;align-items:center;padding:120px 40px 80px;}
+
+/* Petal shapes */
+.petal-bg{position:absolute;inset:0;pointer-events:none;}
+.petal{position:absolute;border-radius:50% 0 50% 0;opacity:0.08;}
+.p1{width:500px;height:500px;background:var(--rose-l);top:-150px;right:-100px;animation:petalspin 20s linear infinite;}
+.p2{width:350px;height:350px;background:#f9a8d4;bottom:-100px;left:-80px;animation:petalspin 15s linear infinite reverse;}
+.p3{width:200px;height:200px;background:white;top:30%;right:15%;animation:petalspin 10s linear infinite;}
+@keyframes petalspin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* Dot pattern */
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,0.07) 1.5px,transparent 1.5px);background-size:32px 32px;}
+
+/* Floating hearts */
+.hearts{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.heart{position:absolute;font-size:20px;animation:floatUp linear infinite;opacity:0;}
+@keyframes floatUp{0%{transform:translateY(100vh) rotate(0deg);opacity:0}10%{opacity:0.6}90%{opacity:0.3}100%{transform:translateY(-100px) rotate(360deg);opacity:0}}
+
+.hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%;}
+
+/* Left */
+.hero-left{animation:riseUp 0.9s ease both;}
+@keyframes riseUp{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:translateY(0)}}
+
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:99px;padding:6px 16px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.9);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:22px;}
+.bdot{width:7px;height:7px;border-radius:50%;background:#fda4af;animation:blink 1.4s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+
+.hero h1{font-family:'Mitr',sans-serif;font-size:clamp(38px,5.5vw,68px);font-weight:700;line-height:1.08;color:white;letter-spacing:-1px;margin-bottom:18px;}
+.hero h1 .accent{color:#fda4af;display:block;}
+.hero h1 .soft{font-weight:300;color:rgba(255,255,255,0.65);}
+.hero-desc{font-size:16px;color:rgba(255,255,255,0.6);line-height:1.75;margin-bottom:32px;max-width:420px;}
+
+.btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px;}
+.btn-main{display:inline-flex;align-items:center;gap:10px;background:white;color:var(--rose-d);padding:16px 30px;border-radius:16px;font-size:16px;font-weight:700;font-family:'Mitr',sans-serif;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 32px rgba(0,0,0,0.2);transition:all 0.25s;}
+.btn-main:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,0.25);}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.25);color:white;padding:16px 24px;border-radius:16px;font-size:15px;font-weight:500;text-decoration:none;transition:all 0.2s;}
+.btn-ghost:hover{background:rgba(255,255,255,0.18);}
+
+.trust-pills{display:flex;gap:10px;flex-wrap:wrap;}
+.trust-pill{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:99px;padding:6px 14px;font-size:13px;color:rgba(255,255,255,0.75);}
+
+/* Right: cards */
+.hero-right{animation:riseUp 0.9s 0.15s ease both;display:flex;flex-direction:column;gap:14px;}
+.hcard{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:18px 20px;backdrop-filter:blur(10px);transition:transform 0.3s;}
+.hcard:hover{transform:translateY(-4px);}
+.hcard-head{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.hcard-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.hcard-title{font-family:'Mitr',sans-serif;font-size:15px;font-weight:600;color:white;}
+.hcard-sub{font-size:12px;color:rgba(255,255,255,0.45);}
+.prog-bar{height:5px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden;margin:8px 0;}
+.prog-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#fda4af,white);animation:progAnim 3s ease infinite alternate;}
+@keyframes progAnim{from{width:30%}to{width:85%}}
+.status-row{display:flex;align-items:center;justify-content:space-between;}
+.status-live{display:flex;align-items:center;gap:6px;font-size:12px;color:#fda4af;font-family:'IBM Plex Mono',monospace;}
+.slive-dot{width:7px;height:7px;border-radius:50%;background:#fda4af;animation:blink 1s infinite;}
+.price-tag{font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:500;color:#fda4af;}
+
+/* ── STATS STRIP ── */
+.stats-strip{background:var(--blush);border-top:1px solid rgba(244,63,94,0.1);border-bottom:1px solid rgba(244,63,94,0.1);}
+.stats-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);padding:20px 40px;}
+.stat-item{text-align:center;padding:12px;border-right:1px solid rgba(244,63,94,0.12);}
+.stat-item:last-child{border-right:none;}
+.stat-num{font-family:'Mitr',sans-serif;font-size:34px;font-weight:700;color:var(--rose);line-height:1;}
+.stat-lbl{font-size:12px;color:var(--muted);margin-top:4px;}
+
+/* ── SERVICES ── */
+.services{background:var(--petal);padding:90px 40px;}
+.sec-inner{max-width:1100px;margin:0 auto;}
+.sec-eye{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--rose);margin-bottom:10px;}
+.sec-h{font-family:'Mitr',sans-serif;font-size:clamp(26px,4vw,42px);font-weight:700;color:var(--warm-d);letter-spacing:-0.5px;margin-bottom:8px;line-height:1.15;}
+.sec-sub{font-size:15px;color:var(--muted);margin-bottom:48px;max-width:460px;line-height:1.65;}
+
+.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.svc{background:white;border-radius:24px;padding:34px 28px;border:1.5px solid transparent;box-shadow:0 2px 20px rgba(244,63,94,0.05);transition:all 0.3s;position:relative;overflow:hidden;}
+.svc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--rose-l),var(--pink));transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
+.svc:hover{border-color:rgba(244,63,94,0.25);transform:translateY(-5px);box-shadow:var(--shadow-pink);}
+.svc:hover::after{transform:scaleX(1);}
+.svc.featured{background:linear-gradient(145deg,var(--warm-d),#9d3d6b);}
+.svc-badge{position:absolute;top:18px;right:18px;background:var(--rose);color:white;border-radius:99px;padding:3px 12px;font-size:11px;font-weight:700;}
+.svc-num{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--rose);font-weight:600;letter-spacing:2px;margin-bottom:18px;}
+.svc.featured .svc-num{color:#fda4af;}
+.svc-icon{font-size:38px;margin-bottom:14px;}
+.svc-name{font-family:'Mitr',sans-serif;font-size:22px;font-weight:700;color:var(--warm-d);margin-bottom:8px;}
+.svc.featured .svc-name{color:white;}
+.svc-desc{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:20px;}
+.svc.featured .svc-desc{color:rgba(255,255,255,0.55);}
+.svc-price{font-family:'Mitr',sans-serif;font-size:30px;font-weight:700;color:var(--rose);}
+.svc.featured .svc-price{color:#fda4af;}
+.svc-price small{font-size:14px;font-weight:400;color:var(--muted);}
+.svc.featured .svc-price small{color:rgba(255,255,255,0.4);}
+
+/* ── HOW ── */
+.how{background:white;padding:90px 40px;}
+.steps-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;margin-top:16px;}
+.steps-row::before{content:'';position:absolute;top:36px;left:12%;right:12%;height:1.5px;background:linear-gradient(90deg,var(--rose-l),var(--pink),var(--rose-l));}
+.how-step{padding:0 14px;text-align:center;position:relative;z-index:1;}
+.step-circle{width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:26px;border:2.5px solid;transition:all 0.3s;background:white;}
+.how-step:nth-child(1) .step-circle{border-color:var(--rose-l);color:var(--rose);}
+.how-step:nth-child(2) .step-circle{border-color:#f9a8d4;color:#ec4899;}
+.how-step:nth-child(3) .step-circle{border-color:#fbb6d4;color:var(--rose);}
+.how-step:nth-child(4) .step-circle{border-color:var(--rose-l);color:var(--rose);}
+.how-step:hover .step-circle{background:linear-gradient(135deg,var(--rose-l),var(--pink));border-color:transparent;box-shadow:var(--shadow-pink);transform:scale(1.1);}
+.step-title{font-family:'Mitr',sans-serif;font-size:15px;font-weight:600;color:var(--warm-d);margin-bottom:8px;}
+.step-desc{font-size:13px;color:var(--muted);line-height:1.55;}
+
+/* ── TESTIMONIALS ── */
+.testi{background:var(--blush-d);padding:90px 40px;}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.tcard{background:white;border-radius:22px;padding:26px;box-shadow:0 2px 20px rgba(244,63,94,0.06);transition:transform 0.3s;position:relative;}
+.tcard:hover{transform:translateY(-5px);box-shadow:var(--shadow-pink);}
+.tcard::before{content:'"';font-size:56px;color:var(--rose-l);line-height:1;display:block;margin-bottom:4px;font-family:Georgia;}
+.tcard-text{font-size:15px;line-height:1.7;color:#5a3342;margin-bottom:18px;}
+.tcard-author{display:flex;align-items:center;gap:12px;}
+.tcard-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.tcard-name{font-weight:700;font-size:14px;color:var(--warm-d);}
+.tcard-role{font-size:12px;color:var(--muted);margin-top:2px;}
+.tcard-stars{font-size:14px;margin-bottom:10px;letter-spacing:2px;}
+
+/* ── CTA ── */
+.cta{background:linear-gradient(135deg,var(--warm-d),#9d3d6b,var(--rose-d));padding:100px 40px;text-align:center;position:relative;overflow:hidden;}
+.cta::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='2' fill='rgba(255,255,255,0.05)'/%3E%3C/svg%3E") repeat;}
+.cta-inner{position:relative;z-index:1;}
+.cta h2{font-family:'Mitr',sans-serif;font-size:clamp(28px,4vw,48px);font-weight:700;color:white;letter-spacing:-0.5px;margin-bottom:10px;line-height:1.15;}
+.cta-sub{font-size:16px;color:rgba(255,255,255,0.55);margin-bottom:36px;}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:32px;}
+.cta-phone{display:inline-flex;align-items:center;gap:20px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:18px 32px;}
+.phone-num{font-family:'Mitr',sans-serif;font-size:28px;font-weight:700;color:#fda4af;}
+.phone-lbl{font-size:12px;color:rgba(255,255,255,0.4);}
+.phone-time{font-family:'Mitr',sans-serif;font-size:18px;font-weight:600;color:white;}
+
+/* ── FOOTER ── */
+footer{background:var(--warm-d);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{font-family:'Mitr',sans-serif;font-weight:700;font-size:18px;color:white;}
+.footer-logo span{color:#fda4af;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.35);}
+.footer-links{display:flex;gap:18px;}
+.footer-links a{font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:#fda4af;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  nav{padding:12px 20px;}
+  .nav-links{display:none;}
+  .hero{padding:90px 20px 60px;}
+  .hero-inner{grid-template-columns:1fr;}
+  .hero-right{display:none;}
+  .stats-inner{grid-template-columns:1fr 1fr;padding:12px 20px;}
+  .stat-item{border-right:none;border-bottom:1px solid rgba(244,63,94,0.1);padding:14px;}
+  .services,.how,.testi,.cta{padding:60px 20px;}
+  .svc-grid{grid-template-columns:1fr;}
+  .steps-row{grid-template-columns:1fr 1fr;gap:28px;}
+  .steps-row::before{display:none;}
+  .testi-grid{grid-template-columns:1fr;}
+  footer{flex-direction:column;text-align:center;padding:20px;}
+  .footer-links{flex-wrap:wrap;justify-content:center;}
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.shown{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">🌸 ใจดี<span class="dot">.pro</span></a>
+  <div class="nav-links">
+    <a href="#services">บริการ</a>
+    <a href="#how">วิธีใช้</a>
+    <a href="#reviews">รีวิว</a>
+    <a href="#cta" class="nav-cta">จองเลย 🌸</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="petal-bg">
+    <div class="petal p1"></div>
+    <div class="petal p2"></div>
+    <div class="petal p3"></div>
+  </div>
+  <div class="hero-dots"></div>
+  <div class="hearts" id="hearts"></div>
+
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge"><span class="bdot"></span>บริการดูแลด้วยใจ</div>
+      <h1>
+        พาคนที่คุณรัก<br>
+        <span class="accent">ไปหาหมอ</span>
+        <span class="soft">อย่างปลอดภัย</span>
+      </h1>
+      <p class="hero-desc">ผู้ดูแลที่ผ่านการอบรม รับถึงบ้าน พาไปสถานพยาบาล ดูแลด้วยความอบอุ่นเหมือนคนในครอบครัว</p>
+      <div class="btn-row">
+        <a href="#cta" class="btn-main">🌸 จองผู้ดูแลเลย</a>
+        <a href="#how" class="btn-ghost">ดูวิธีใช้งาน →</a>
+      </div>
+      <div class="trust-pills">
+        <div class="trust-pill">💝 ทีมดูแลผ่านอบรม</div>
+        <div class="trust-pill">📍 ติดตาม GPS live</div>
+        <div class="trust-pill">⭐ รีวิว 4.9/5</div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hcard">
+        <div class="hcard-head">
+          <div class="hcard-icon" style="background:rgba(253,164,175,0.2)">📍</div>
+          <div><div class="hcard-title">ผู้ดูแลกำลังเดินทาง</div><div class="hcard-sub">สมหญิง · Toyota Camry · กก-1234</div></div>
+        </div>
+        <div class="status-row"><div class="status-live"><div class="slive-dot"></div>กำลังนำทาง</div><span style="font-size:13px;color:#fda4af;font-weight:700">~18 นาที</span></div>
+        <div class="prog-bar"><div class="prog-fill"></div></div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.3);text-align:right">ติดตาม real-time</div>
+      </div>
+
+      <div class="hcard" style="display:flex;align-items:center;gap:14px;padding:16px 20px">
+        <div style="font-size:36px">⭐</div>
+        <div style="flex:1">
+          <div style="font-family:'Mitr',sans-serif;font-size:14px;font-weight:600;color:white;margin-bottom:3px">รีวิวล่าสุด</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.45)">"ดูแลแม่ผมได้ดีมาก ใจดีมากเลยครับ"</div>
+          <div style="font-size:11px;color:#fda4af;margin-top:4px">⭐⭐⭐⭐⭐ · คุณสมชาย</div>
+        </div>
+      </div>
+
+      <div class="hcard" style="display:flex;align-items:center;gap:14px;padding:16px 20px">
+        <div style="font-size:34px">🗓</div>
+        <div style="flex:1">
+          <div style="font-family:'Mitr',sans-serif;font-size:14px;font-weight:600;color:white;margin-bottom:2px">นัดหมายพรุ่งนี้</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.45)">09:00 น. · รพ.จุฬาฯ</div>
+        </div>
+        <div style="background:linear-gradient(135deg,#fda4af,var(--rose));color:white;border-radius:10px;padding:7px 14px;font-size:12px;font-weight:700">ยืนยัน</div>
+      </div>
+
+      <div class="hcard" style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;text-align:center;padding:14px 10px">
+        <div style="padding:8px;border-right:1px solid rgba(255,255,255,0.1)"><div style="font-family:'Mitr',sans-serif;font-size:24px;font-weight:700;color:#fda4af">2,400+</div><div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px">ทริปสำเร็จ</div></div>
+        <div style="padding:8px;border-right:1px solid rgba(255,255,255,0.1)"><div style="font-family:'Mitr',sans-serif;font-size:24px;font-weight:700;color:#fda4af">4.9⭐</div><div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px">คะแนนเฉลี่ย</div></div>
+        <div style="padding:8px"><div style="font-family:'Mitr',sans-serif;font-size:24px;font-weight:700;color:#fda4af">18ด.</div><div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px">รับเฉลี่ย</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item reveal"><div class="stat-num">2,400+</div><div class="stat-lbl">ทริปสำเร็จแล้ว</div></div>
+    <div class="stat-item reveal"><div class="stat-num">4.9 ⭐</div><div class="stat-lbl">คะแนนรีวิวเฉลี่ย</div></div>
+    <div class="stat-item reveal"><div class="stat-num">5 คน</div><div class="stat-lbl">ผู้ดูแลมืออาชีพ</div></div>
+    <div class="stat-item reveal"><div class="stat-num">18 นาที</div><div class="stat-lbl">เวลารับเฉลี่ย</div></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="sec-inner">
+    <div class="sec-eye reveal">💝 แพ็กเกจบริการ</div>
+    <div class="sec-h reveal">เลือกแบบที่เหมาะกับคุณ</div>
+    <div class="sec-sub reveal">ราคาชัดเจน ไม่มีค่าใช้จ่ายแอบแฝง ดูแลด้วยความใส่ใจทุกครั้ง</div>
+    <div class="svc-grid">
+      <div class="svc reveal">
+        <div class="svc-num">01 · BASIC</div>
+        <div class="svc-icon">🚗</div>
+        <div class="svc-name">พาไป-กลับ</div>
+        <div class="svc-desc">รับถึงบ้าน พาไปสถานพยาบาล รอระหว่างพบแพทย์ ส่งกลับบ้านปลอดภัย</div>
+        <div class="svc-price">฿399 <small>/ ทริป</small></div>
+      </div>
+      <div class="svc featured reveal">
+        <div class="svc-badge">💝 แนะนำ</div>
+        <div class="svc-num">02 · CARE+</div>
+        <div class="svc-icon">🧑‍⚕️</div>
+        <div class="svc-name">ดูแลพิเศษ</div>
+        <div class="svc-desc">ทุกอย่างในแพ็กเกจแรก + ช่วยพูดคุยกับแพทย์ จดบันทึกยาและคำแนะนำ ส่งรายงานให้ครอบครัว</div>
+        <div class="svc-price">฿599 <small>/ ทริป</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="how" id="how">
+  <div class="sec-inner">
+    <div class="sec-eye reveal">🌸 วิธีการใช้งาน</div>
+    <div class="sec-h reveal">ง่าย 4 ขั้นตอน</div>
+    <div class="sec-sub reveal">จองได้ภายในไม่กี่นาที ผู้ดูแลพร้อมมารับทันที</div>
+    <div class="steps-row">
+      <div class="how-step reveal">
+        <div class="step-circle">📱</div>
+        <div class="step-title">จองออนไลน์</div>
+        <div class="step-desc">เลือกบริการ วันเวลา และที่อยู่ผ่านเว็บหรือ Line</div>
+      </div>
+      <div class="how-step reveal">
+        <div class="step-circle">🔔</div>
+        <div class="step-title">ยืนยันจอง</div>
+        <div class="step-desc">รับการยืนยันทันที พร้อมข้อมูลผู้ดูแล</div>
+      </div>
+      <div class="how-step reveal">
+        <div class="step-circle">🚗</div>
+        <div class="step-title">รับถึงบ้าน</div>
+        <div class="step-desc">ผู้ดูแลมาตรงเวลา ติดตาม GPS ได้ real-time</div>
+      </div>
+      <div class="how-step reveal">
+        <div class="step-circle">🏠</div>
+        <div class="step-title">ส่งกลับบ้าน</div>
+        <div class="step-desc">พาส่งปลอดภัย สรุปผลการพบแพทย์ให้ครอบครัว</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi" id="reviews">
+  <div class="sec-inner">
+    <div class="sec-eye reveal">💬 เสียงจากลูกค้า</div>
+    <div class="sec-h reveal">ครอบครัวไว้วางใจ</div>
+    <div class="sec-sub reveal">ความอบอุ่นที่ลูกหลานมอบให้พ่อแม่ผ่านทีมใจดี.pro</div>
+    <div class="testi-grid">
+      <div class="tcard reveal">
+        <div class="tcard-stars">⭐⭐⭐⭐⭐</div>
+        <div class="tcard-text">"ทำงานอยู่ไม่สามารถพาแม่ไปหาหมอได้ ใช้บริการใจดี.pro ผู้ดูแลมาตรงเวลา ดูแลแม่ดีมาก ติดตามได้ตลอด สบายใจมากขึ้นครับ"</div>
+        <div class="tcard-author">
+          <div class="tcard-av" style="background:var(--blush)">👨</div>
+          <div><div class="tcard-name">คุณสมชาย ว.</div><div class="tcard-role">ลูกชาย · ใช้บริการ 8 ครั้ง</div></div>
+        </div>
+      </div>
+      <div class="tcard reveal">
+        <div class="tcard-stars">⭐⭐⭐⭐⭐</div>
+        <div class="tcard-text">"พ่ออายุ 78 ปี เดินไม่สะดวก ผู้ดูแลช่วยดูแลได้ดีมาก ช่วยคุยกับหมอและจดยาให้ด้วย ประทับใจมากค่ะ จะใช้ต่อเรื่อยๆ"</div>
+        <div class="tcard-author">
+          <div class="tcard-av" style="background:var(--blush)">👩</div>
+          <div><div class="tcard-name">คุณสุภาพร ก.</div><div class="tcard-role">ลูกสาว · ใช้บริการ 12 ครั้ง</div></div>
+        </div>
+      </div>
+      <div class="tcard reveal">
+        <div class="tcard-stars">⭐⭐⭐⭐⭐</div>
+        <div class="tcard-text">"ราคาสมเหตุสมผล มี GPS ติดตามได้ตลอด ทำให้รู้สึกปลอดภัยมาก แนะนำให้ทุกคนที่มีผู้สูงอายุที่บ้านเลยค่ะ"</div>
+        <div class="tcard-author">
+          <div class="tcard-av" style="background:var(--blush)">👩‍💼</div>
+          <div><div class="tcard-name">คุณนภาพร ล.</div><div class="tcard-role">หลานสาว · ใช้บริการ 5 ครั้ง</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="cta">
+  <div class="cta-inner">
+    <div class="sec-eye" style="color:#fda4af;text-align:center;margin-bottom:12px">🌸 ติดต่อเรา</div>
+    <h2 class="reveal">พร้อมดูแลคนที่คุณรัก<br>วันนี้เลย</h2>
+    <div class="cta-sub reveal">จองล่วงหน้าหรือจองด่วนได้ทันที เปิดบริการทุกวัน 07:00–21:00 น.</div>
+    <div class="cta-btns reveal">
+      <a href="tel:0812345678" class="btn-main">📞 โทรจองเลย</a>
+      <a href="#" class="btn-ghost">💬 Line OA</a>
+    </div>
+    <div class="cta-phone reveal">
+      <div><div class="phone-lbl">โทรหาเรา</div><div class="phone-num">081-234-5678</div></div>
+      <div style="width:1px;height:40px;background:rgba(255,255,255,0.1)"></div>
+      <div><div class="phone-lbl">เปิดบริการ</div><div class="phone-time">07:00–21:00 น.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🌸 ใจดี<span>.pro</span></div>
+  <div class="footer-copy">© 2025 jaidee.pro · บริการพาไปหาหมอ กรุงเทพฯ</div>
+  <div class="footer-links">
+    <a href="#">นโยบายความเป็นส่วนตัว</a>
+    <a href="#">เงื่อนไขบริการ</a>
+    <a href="#cta">ติดต่อ</a>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',scrollY>50);
+});
+
+// Floating hearts
+const h=document.getElementById('hearts');
+const emojis=['🌸','💕','💗','🌺','💝','🩷'];
+for(let i=0;i<18;i++){
+  const d=document.createElement('div');
+  d.className='heart';
+  d.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+  d.style.cssText=`left:${Math.random()*100}%;animation-duration:${8+Math.random()*12}s;animation-delay:${Math.random()*10}s;font-size:${14+Math.random()*16}px;`;
+  h.appendChild(d);
+}
+
+// Scroll reveal
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('shown'),i*80);
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
